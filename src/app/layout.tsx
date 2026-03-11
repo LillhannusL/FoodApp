@@ -1,18 +1,23 @@
-import "./globals.css";
-import NavBar from "@/components/shared/Navbar";
+import './globals.css';
+import { Karla } from 'next/font/google';
+import NavBar from '@/components/shared/Navbar';
+
+const karla = Karla({
+	subsets: ['latin'],
+});
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
+	return (
+		<html lang="en" className={karla.className}>
+			<body className="bg-primary-gradient min-h-screen text-light-primary">
+				{children}
 
-        <NavBar />
-      </body>
-    </html>
-  );
+				<NavBar />
+			</body>
+		</html>
+	);
 }
