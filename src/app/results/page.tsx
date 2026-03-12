@@ -1,21 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ContentBox from '@/components/shared/ContentBox';
-import { fetchRandomRecipes } from '@/services/recipeApi';
+import {
+	fetchRandomRecipes,
+	fetchRecipeByIngredient,
+} from '@/services/recipeApi';
 import RecipeCarousel from '@/components/recipe/recipeCarousel';
+import { useIngredientsStore } from '@/store/useIngredientsStore';
 
-// import MockData from '@/data/mock-recipes.json';
+import MockData from '@/data/mock-recipes.json';
 import type { Recipe } from '@/types';
 
-export default function RandomRecipePage() {
+export default function ResultsPage() {
+	const searchParams = useSearchParams();
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
-	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// const Allrecipes = MockData.recipes;
+	const type = searchParams.get('type');
+	const { ingredients } = useIngredientsStore();
 
-	// MockData
+	// const Allrecipes = MockData.recipes;
+	// MockData;
 	// useEffect(() => {
 	// 	const loadInitial = () => {
 	// 		setRecipes(Allrecipes);
@@ -25,16 +32,31 @@ export default function RandomRecipePage() {
 	// }, [Allrecipes]);
 
 	useEffect(() => {
-		const loadInitial = async () => {
-			const data = await fetchRandomRecipes(10);
+		const fetchData = async () => {
+			if (type !== 'random' && (!ingredients || ingredients.length === 0)) {
+				setIsLoading(false);
+				return;
+			}
 
-			console.log('data som hämtats:', data);
+			setIsLoading(true);
+			try {
+				let data;
+				if (type === 'random') {
+					data = await fetchRandomRecipes(10);
+				} else {
+					data = await fetchRecipeByIngredient(ingredients);
+				}
 
-			setRecipes(data);
-			setIsLoading(false);
+				setRecipes(data);
+			} catch (error) {
+				console.error('Fetching error:', error);
+			} finally {
+				setIsLoading(false);
+			}
 		};
-		loadInitial();
-	}, []);
+
+		fetchData();
+	}, [type, ingredients]);
 
 	return (
 		<section className="px-4">

@@ -1,5 +1,4 @@
 const API_KEY = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
-const URL_RANDOM = process.env.NEXT_PUBLIC_SPOONACULAR_RANDOM_URL;
 
 // const fetchMockData = async () => {
 //   try {
@@ -24,5 +23,22 @@ export const fetchRandomRecipes = async (number: Number) => {
 		return data.recipes;
 	} catch (error) {
 		console.error('Fel vid hämtning:', error);
+	}
+};
+
+export const fetchRecipeByIngredient = async (ingredients: String[]) => {
+	console.log(ingredients);
+	try {
+		const searchString = ingredients.join(',+');
+		console.log(searchString);
+		const res = await fetch(
+			`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${searchString}&number=10`,
+		);
+		const data = await res.json();
+
+		return data;
+	} catch (error) {
+		console.error('Fel vid hämtning:', error);
+		return [];
 	}
 };
