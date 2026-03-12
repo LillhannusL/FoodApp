@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 export default function RandomRecipeBtn() {
 	const router = useRouter();
 
-	const handleGoToRandom = () => {
-		router.push('/random-recipe');
+	const handleGoToResult = () => {
+		router.push('/results?type=random');
 	};
 
 	return (
 		<button
 			className="btn btn-xl btn-block bg-blue-gradient border-none text-xl"
-			onClick={handleGoToRandom}
+			onClick={handleGoToResult}
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
