@@ -27,10 +27,9 @@ export const fetchRandomRecipes = async (number: Number) => {
 };
 
 export const fetchRecipeByIngredient = async (ingredients: String[]) => {
-	console.log(ingredients);
 	try {
 		const searchString = ingredients.join(',+');
-		console.log(searchString);
+
 		const res = await fetch(
 			`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${searchString}&number=10`,
 		);
@@ -40,5 +39,23 @@ export const fetchRecipeByIngredient = async (ingredients: String[]) => {
 	} catch (error) {
 		console.error('Fel vid hämtning:', error);
 		return [];
+	}
+};
+
+export const fetchRecipeByID = async (id: number) => {
+	console.log('id till fetch:', id);
+	try {
+		const res = await fetch(
+			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`,
+		);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+
+		const data = await res.json();
+		console.log('hämtad data:', data);
+		return data;
+	} catch (error) {
+		console.error('Fel vid hämtning:', error);
 	}
 };
