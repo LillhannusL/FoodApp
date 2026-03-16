@@ -1,7 +1,7 @@
-import type { Recipe } from '@/types/index';
+import type { RecipeData } from '@/types/index';
 
 interface Props {
-	recipe: Recipe;
+	recipe: RecipeData;
 }
 
 export default function RecipeCard({ recipe }: Props) {
