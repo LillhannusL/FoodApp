@@ -59,12 +59,20 @@ export default function Recipe({ params }: { params: PageParams }) {
 
 	return (
 		<section>
-			<img src={recipe.image} alt={recipe.title} className="relative" />
-			<div className="z-10 absolute top-50 font-bold text-2xl left-5">
+			<img src={recipe.image} alt={recipe.title} className="relative " />
+			<div className="z-10 absolute top-45 font-bold text-2xl left-5 space-y-2">
 				<h1>{recipe.title}</h1>
-				<span className="badge">{recipe.readyInMinutes} min</span>
-				<span className="badge">{recipe.servings} port</span>
-				<span className="badge">{ingredientCount} Ingr</span>
+				<div className="flex gap-4">
+					<span className="badge bg-green-gradient border-none p-4 rounded-full shadow-md">
+						{recipe.readyInMinutes} min
+					</span>
+					<span className="badge bg-green-gradient border-none p-4 rounded-full shadow-md">
+						{recipe.servings} port
+					</span>
+					<span className="badge bg-green-gradient border-none p-4 rounded-full shadow-md">
+						{ingredientCount} Ingr
+					</span>
+				</div>
 			</div>
 
 			<div className="flex flex-col gap-4 p-4 pb-24">

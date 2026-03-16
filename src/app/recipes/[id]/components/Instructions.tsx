@@ -39,7 +39,7 @@ export default function Instructions({ instructions }: InstructionsProps) {
 							<p className="">{step.step}</p>
 
 							{/* Om det finns utrustning, visa små diskreta taggar */}
-							{step.equipment && step.equipment.length > 0 && (
+							{/* {step.equipment && step.equipment.length > 0 && (
 								<div className="flex flex-wrap gap-2 mt-4">
 									{step.equipment.map((item, index) => (
 										<span key={index} className="badge badge-outline">
@@ -47,7 +47,7 @@ export default function Instructions({ instructions }: InstructionsProps) {
 										</span>
 									))}
 								</div>
-							)}
+							)} */}
 						</div>
 					</div>
 				))}

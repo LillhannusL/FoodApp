@@ -1,7 +1,13 @@
 export interface Ingredient {
 	id: number;
-	original: string; // Ex: "2 cups of flour"
 	name: string;
+	aisle: string;
+	measures: {
+		metric: {
+			amount: number;
+			unitShort: string;
+		};
+	};
 }
 
 interface InstructionStep {
