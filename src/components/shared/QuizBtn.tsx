@@ -1,8 +1,12 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 export default function QuizBtn() {
+	const router = useRouter();
+
 	const handleClick = () => {
-		console.log('click');
+		router.push('/quiz');
 	};
 
 	return (

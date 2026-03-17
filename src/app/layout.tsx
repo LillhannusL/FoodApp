@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={karla.className}>
-			<body className="bg-primary-gradient min-h-screen text-light-primary">
+			<body className="bg-primary-gradient min-h-screen text-light-primary px-4">
 				{children}
 
 				<NavBar />
