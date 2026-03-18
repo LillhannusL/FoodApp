@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export interface Ingredient {
 	id: number;
 	name: string;
@@ -36,4 +38,17 @@ export interface RecipeData {
 	glutenFree?: boolean;
 	dishTypes?: string[];
 	analyzedInstructions?: AnalyzedInstructions[];
+}
+
+export interface QuestionType {
+	id: number;
+	question: string;
+	buttonStyle: string;
+	answers: answerType[];
+}
+
+export interface answerType {
+	text: string;
+	image?: string;
+	symbol?: any;
 }

@@ -1,17 +1,6 @@
-const API_KEY = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
+import { buildURL } from '@/services/buildUrl';
 
-// const fetchMockData = async () => {
-//   try {
-//     const res = await fetch(
-//       `https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}`,
-//     );
-//     const data = await res.json();
-//     console.log("Här är din mock-data, kopiera hela detta objekt:");
-//     console.log(JSON.stringify(data, null, 2));
-//   } catch (err) {
-//     console.error("Fel vid hämtning:", err);
-//   }
-// };
+const API_KEY = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
 
 export const fetchRandomRecipes = async (number: Number) => {
 	try {
@@ -43,7 +32,6 @@ export const fetchRecipeByIngredient = async (ingredients: String[]) => {
 };
 
 export const fetchRecipeByID = async (id: number) => {
-	console.log('id till fetch:', id);
 	try {
 		const res = await fetch(
 			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`,
@@ -53,9 +41,33 @@ export const fetchRecipeByID = async (id: number) => {
 		}
 
 		const data = await res.json();
-		console.log('hämtad data:', data);
+
 		return data;
 	} catch (error) {
 		console.error('Fel vid hämtning:', error);
+	}
+};
+
+export const fetchRecipefromQuiz = async (result: any) => {
+	try {
+		let finalUrl = buildURL(result);
+		let res = await fetch(
+			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&${finalUrl}`,
+		);
+		let data = await res.json();
+
+		if (!data.results || data.results.length === 0) {
+			const broadAnswers = [result[0], result[1], 'surprise', 'high'];
+
+			finalUrl = buildURL(broadAnswers);
+			res = await fetch(
+				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&${finalUrl}`,
+			);
+			data = await res.json();
+		}
+
+		return data.results;
+	} catch (error) {
+		console.error('Failed to fetch:', error);
 	}
 };

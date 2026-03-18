@@ -10,7 +10,7 @@ export default function Home() {
 				Vad är du sugen på?
 			</h1>
 
-			<div className="px-4">
+			<div>
 				<ContentBox>
 					<div className="flex-none">
 						<SearchFunction />
