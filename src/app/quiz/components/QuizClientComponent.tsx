@@ -1,55 +1,50 @@
 'use client';
 
-import { quizData } from '@/data/quizData';
 import { useState } from 'react';
-import type { QuestionType, answerType } from '@/types';
 import {
 	EnergyQuestion,
 	CravingQuestion,
-	TimeQuestion,
+	DishPreference,
+	DietPreference,
 } from '@/app/quiz/components/QuestionsComponent';
+import { useQuizStore } from '@/store/useQuizStore';
+import { useRouter } from 'next/navigation';
 
 export default function QuizClientComponent() {
-	// const [currentQuestion, setCurrentQuestion] = useState(0);
+	const router = useRouter();
 	const [step, setStep] = useState(0);
 	const [answers, setAnswers] = useState({});
-	// const [isFinished, setIsFinished] = useState(false);
+	const { setResult } = useQuizStore();
 
-	// const question: QuestionType = quizData[currentQuestion];
-
-	// const handleAnswer = (option: answerType) => {
-	// 	// Save answer
-	// 	setAnswers((prev) => ({
-	// 		...prev,
-	// 		[currentQuestion]: option.text,
-	// 	}));
-
-	// 	// Go to next question or finish
-	// 	if (currentQuestion < quizData.length - 1) {
-	// 		setCurrentQuestion((prev) => prev + 1);
-	// 	} else {
-	// 		setIsFinished(true);
-	// 		console.log(answers);
-	// 	}
-	// };
+	const totalSteps = 4;
 
 	const handleNext = (val: string) => {
-		setAnswers({ ...answers, [step]: val });
+		const updatedAnswers = { ...answers, [step]: val };
+		setAnswers(updatedAnswers);
+
 		setStep(step + 1);
 	};
 
-	if (step > 2) {
+	const handleClick = () => {
+		setResult(answers);
+		router.push('/results?type=quiz');
+	};
+
+	if (step >= totalSteps) {
 		return (
-			<section className="text-center pt-28">
+			<section className="text-center pt-28 flex flex-col">
 				<h1 className="text-4xl font-bold">The Quiz is done!</h1>
 				<p className="mt-4">
-					We are working on finding recipes that match your energy...
+					We've analyzed your energy and cravings. Ready for your recipes?
 				</p>
+				<button className="btn my-4" onClick={handleClick}>
+					See recipes
+				</button>
 				<button
-					className="btn bg-orange-gradient mt-8"
+					className="btn bg-orange-gradient mt-8 "
 					onClick={() => window.location.reload()}
 				>
-					Take Quiz again
+					Start Over
 				</button>
 			</section>
 		);
@@ -61,17 +56,18 @@ export default function QuizClientComponent() {
 			<div className="flex flex-col items-center gap-4">
 				<progress
 					className="progress progress-warning w-full"
-					value={((step + 1) / quizData.length) * 100}
+					value={((step + 1) / totalSteps) * 100}
 					max={100}
 				></progress>
 				<span className="text-sm font-semibold uppercase text-light-primary">
-					{`Fråga ${step + 1} av ${quizData.length}`}
+					{`Question ${step + 1} of ${totalSteps}`}
 				</span>
 			</div>
 
-			{step === 0 && <EnergyQuestion onAnswer={handleNext} />}
-			{step === 1 && <CravingQuestion onAnswer={handleNext} />}
-			{step === 2 && <TimeQuestion onAnswer={handleNext} />}
+			{step === 0 && <DishPreference onAnswer={handleNext} />}
+			{step === 1 && <DietPreference onAnswer={handleNext} />}
+			{step === 2 && <CravingQuestion onAnswer={handleNext} />}
+			{step === 3 && <EnergyQuestion onAnswer={handleNext} />}
 		</section>
 	);
 }

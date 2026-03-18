@@ -4,12 +4,13 @@ import ContentBox from '@/components/shared/ContentBox';
 
 export default function QuizPage() {
 	return (
-		<>
+		<div className="min-h-screen">
 			<BackBtn route={'/'} />
-			<h1 className="text-4xl font-bold py-4 text-center">...</h1>
-			<ContentBox>
-				<QuizClientComponent />
-			</ContentBox>
-		</>
+			<div className="pt-8 pb-24">
+				<ContentBox>
+					<QuizClientComponent />
+				</ContentBox>
+			</div>
+		</div>
 	);
 }
