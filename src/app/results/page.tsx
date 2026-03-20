@@ -26,7 +26,7 @@ export default function ResultsPage() {
   const type = searchParams.get("type");
   const { ingredients } = useIngredientsStore();
   const { result } = useQuizStore();
-
+  console.log("QUIZ RESULT:", result);
   if (!type) {
     return null;
   }
@@ -54,7 +54,7 @@ export default function ResultsPage() {
         let data;
 
         if (type === "random") {
-          data = await fetchRandomRecipes(10);
+          data = await fetchRandomRecipes();
         } else if (type === "search") {
           data = await fetchRecipeByIngredient(ingredients);
         } else {
