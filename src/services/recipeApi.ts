@@ -1,12 +1,9 @@
 import { buildURL } from '@/services/buildUrl';
 
-const API_KEY = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
+export const fetchRandomRecipes = async () => {
 
-export const fetchRandomRecipes = async (number: Number) => {
 	try {
-		const res = await fetch(
-			`https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=${number}`,
-		);
+		const res = await fetch("/api/recipes/random");
 		const data = await res.json();
 
 		return data.recipes;
@@ -16,11 +13,12 @@ export const fetchRandomRecipes = async (number: Number) => {
 };
 
 export const fetchRecipeByIngredient = async (ingredients: String[]) => {
+
 	try {
 		const searchString = ingredients.join(',+');
 
 		const res = await fetch(
-			`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${searchString}&number=10`,
+			`/api/recipes/search?ingredients=${searchString}`,
 		);
 		const data = await res.json();
 
@@ -31,10 +29,12 @@ export const fetchRecipeByIngredient = async (ingredients: String[]) => {
 	}
 };
 
-export const fetchRecipeByID = async (id: number) => {
+export const fetchRecipeByID = async (id: string) => {
+
+
 	try {
 		const res = await fetch(
-			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`,
+			`/api/recipes/id?id=${id}`,
 		);
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
@@ -50,23 +50,14 @@ export const fetchRecipeByID = async (id: number) => {
 
 export const fetchRecipefromQuiz = async (result: any) => {
 	try {
-		let finalUrl = buildURL(result);
-		let res = await fetch(
-			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&${finalUrl}`,
-		);
+		if (!result) return [];
+		
+		let query = buildURL(result);
+
+		let res = await fetch(`/api/recipes/quiz?query=${query}`)
 		let data = await res.json();
 
-		if (!data.results || data.results.length === 0) {
-			const broadAnswers = [result[0], result[1], 'surprise', 'high'];
-
-			finalUrl = buildURL(broadAnswers);
-			res = await fetch(
-				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&${finalUrl}`,
-			);
-			data = await res.json();
-		}
-
-		return data.results;
+		return data.results || [];
 	} catch (error) {
 		console.error('Failed to fetch:', error);
 	}
