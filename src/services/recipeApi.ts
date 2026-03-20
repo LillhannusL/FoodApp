@@ -31,7 +31,7 @@ export const fetchRecipeByIngredient = async (ingredients: String[]) => {
 	}
 };
 
-export const fetchRecipeByID = async (id: number) => {
+export const fetchRecipeByID = async (id: string) => {
 	try {
 		const res = await fetch(
 			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`,
