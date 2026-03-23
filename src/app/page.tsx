@@ -5,25 +5,35 @@ import QuizBtn from '@/components/shared/QuizBtn';
 
 export default function Home() {
 	return (
-		<main className="w-full min-h-screen">
-			<h1 className="text-4xl font-bold pt-16 pb-8 text-center md:pt-28">
-				Vad är du sugen på?
+		<main
+			className="w-full min-h-screen px-4 flex flex-col items-center
+		"
+		>
+			<h1 className="text-4xl font-bold pt-10 pb-4 text-center md:pt-28">
+				Hungry?
 			</h1>
+			<h2 className="text-2xl font-semibold pb-4">Dont know what to eat?</h2>
 
-			<div>
+			<div className="w-full flex flex-col items-center">
 				<ContentBox>
 					<div className="flex-none">
+						<h3 className="text-lg font-medium text-center pb-4">
+							Search on ingredients
+						</h3>
 						<SearchFunction />
 					</div>
 
-					<div className="flex-none flex flex-col gap-4">
-						<div className="divider">ELLER</div>
+					<div className="divider">OR</div>
+
+					<div className="w-full flex items-center justify-center pb-4">
 						<RandomRecipeBtn />
 					</div>
 
-					<div className="bg-light-primary/50 p-8 rounded-4xl border border-white/20 flex flex-col items-center gap-4 ">
-						<p>Beslutsångest?</p>
-						<QuizBtn />
+					<div className="w-full flex justify-center">
+						<div className="w-full flex flex-col justify-center items-center gap-4 bg-light-primary/40 rounded-4xl border border-white/70 p-6 sm:max-w-4xl sm:py-12">
+							<p className="text-2xl font-semibold">Can't deside?</p>
+							<QuizBtn />
+						</div>
 					</div>
 				</ContentBox>
 			</div>

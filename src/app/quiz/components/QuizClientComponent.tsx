@@ -32,16 +32,18 @@ export default function QuizClientComponent() {
 
 	if (step >= totalSteps) {
 		return (
-			<section className="text-center pt-28 flex flex-col">
+			<section className="text-center pt-28 flex flex-col gap-4 items-center justify-center h-full">
 				<h1 className="text-4xl font-bold">The Quiz is done!</h1>
-				<p className="mt-4">
-					We've analyzed your energy and cravings. Ready for your recipes?
-				</p>
-				<button className="btn my-4" onClick={handleClick}>
+				<p className="mt-4">We've analyzed your energy and cravings.</p>
+				<p>Ready for your recipes?</p>
+				<button
+					className="btn btn-xl btn-block border-none text-xl bg-linear-to-r from-emerald-400 to-cyan-400 rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mt-4"
+					onClick={handleClick}
+				>
 					See recipes
 				</button>
 				<button
-					className="btn bg-orange-gradient mt-8 "
+					className="btn btn-xl btn-block border-none text-xl bg-orange-gradient rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mb-4 mt-auto"
 					onClick={() => window.location.reload()}
 				>
 					Start Over

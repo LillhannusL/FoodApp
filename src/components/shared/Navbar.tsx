@@ -73,13 +73,32 @@ export default function NavBar() {
 			<nav className="hidden md:flex navbar bg-light-primary/40 backdrop-blur-md border-b border-white/30 shadow-sm fixed top-0 z-50">
 				<div className="flex-1">
 					<button className="btn btn-ghost">
-						<Link href="/">Mat app</Link>
+						<Link href="/">Food App</Link>
 					</button>
 				</div>
 				<div>
 					<ul className="menu menu-horizontal">
 						<li>
-							<Link href="/recipes">Recipes</Link>
+							<button>
+								<Link href="/profile" className="flex flex-col items-center">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										className="lucide lucide-user-round-icon lucide-user-round"
+									>
+										<circle cx="12" cy="8" r="5" />
+										<path d="M20 21a8 8 0 0 0-16 0" />
+									</svg>
+									<span className="dockl-label">User</span>
+								</Link>
+							</button>
 						</li>
 					</ul>
 				</div>

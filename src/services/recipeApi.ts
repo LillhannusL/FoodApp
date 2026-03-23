@@ -1,9 +1,8 @@
 import { buildURL } from '@/services/buildUrl';
 
 export const fetchRandomRecipes = async () => {
-
 	try {
-		const res = await fetch("/api/recipes/random");
+		const res = await fetch('/api/recipes/random');
 		const data = await res.json();
 
 		return data.recipes;
@@ -13,13 +12,10 @@ export const fetchRandomRecipes = async () => {
 };
 
 export const fetchRecipeByIngredient = async (ingredients: String[]) => {
-
 	try {
 		const searchString = ingredients.join(',+');
 
-		const res = await fetch(
-			`/api/recipes/search?ingredients=${searchString}`,
-		);
+		const res = await fetch(`/api/recipes/search?ingredients=${searchString}`);
 		const data = await res.json();
 
 		return data;
@@ -30,12 +26,8 @@ export const fetchRecipeByIngredient = async (ingredients: String[]) => {
 };
 
 export const fetchRecipeByID = async (id: string) => {
-
-
 	try {
-		const res = await fetch(
-			`/api/recipes/id?id=${id}`,
-		);
+		const res = await fetch(`/api/recipes/id?id=${id}`);
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}
@@ -51,10 +43,10 @@ export const fetchRecipeByID = async (id: string) => {
 export const fetchRecipefromQuiz = async (result: any) => {
 	try {
 		if (!result) return [];
-		
+
 		let query = buildURL(result);
 
-		let res = await fetch(`/api/recipes/quiz?query=${query}`)
+		let res = await fetch(`/api/recipes/quiz?query=${query}`);
 		let data = await res.json();
 
 		return data.results || [];

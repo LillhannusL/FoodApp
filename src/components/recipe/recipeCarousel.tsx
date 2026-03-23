@@ -1,4 +1,5 @@
 import type { RecipeData } from '@/types/index';
+import Image from 'next/image';
 
 interface Props {
 	recipes: RecipeData[];
@@ -42,25 +43,27 @@ export default function RecipeCarousel({
 					<div
 						key={recipe.id}
 						id={`slide${index}`}
-						className="carousel-item relative w-full flex flex-col"
+						className="carousel-item relative w-full flex flex-col "
 					>
-						<div className="relative h-64 w-full">
-							<img
+						<div className="h-90">
+							<Image
 								src={recipe.image}
-								className="w-full h-full object-cover"
 								alt={recipe.title}
+								width={600}
+								height={600}
+								className="w-full h-full object-cover rounded-xl sm:object-contain"
 							/>
 
-							<div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between z-10">
+							<div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between z-10 sm:left-52 sm:right-52">
 								<button
 									onClick={gotToPrev}
-									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40"
+									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
 								>
 									❮
 								</button>
 								<button
 									onClick={goToNext}
-									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40"
+									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
 								>
 									❯
 								</button>
@@ -68,8 +71,10 @@ export default function RecipeCarousel({
 						</div>
 
 						{/* Text-sektion under bilden */}
-						<div className=" ">
-							<h4 className="">{recipe.title}</h4>
+						<div className="">
+							<h4 className="text-center py-4 text-lg font-semibold tracking-wide sm:text-3xl">
+								{recipe.title}
+							</h4>
 						</div>
 					</div>
 				);

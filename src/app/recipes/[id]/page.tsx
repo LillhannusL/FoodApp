@@ -7,6 +7,7 @@ import ContentBox from '@/components/shared/ContentBox';
 import type { RecipeData } from '@/types/index';
 import Instructions from '@/app/recipes/[id]/components/Instructions';
 import IngredientsList from '@/app/recipes/[id]/components/IngredientsList';
+import Image from 'next/image';
 
 type PageParams = Promise<{ id: string }>;
 
@@ -58,10 +59,15 @@ export default function Recipe({ params }: { params: PageParams }) {
 	const ingredientCount = recipe.extendedIngredients.length;
 
 	return (
-		<section>
-			<img src={recipe.image} alt={recipe.title} className="relative " />
-			<div className="z-10 absolute top-45 font-bold text-2xl left-5 space-y-2">
-				<h1>{recipe.title}</h1>
+		<section className="sm:flex sm:flex-col sm:items-center">
+			<Image
+				src={recipe.image}
+				alt={recipe.title}
+				width={500}
+				height={500}
+				className="relative sm:pt-32 rounded-xl object-scaling-down"
+			/>
+			<div className="z-10 absolute top-35 font-bold text-2xl space-y-2 p-2 sm:top-85">
 				<div className="flex gap-4">
 					<span className="badge bg-green-gradient border-none p-4 rounded-full shadow-md">
 						{recipe.readyInMinutes} min
@@ -73,6 +79,9 @@ export default function Recipe({ params }: { params: PageParams }) {
 						{ingredientCount} Ingr
 					</span>
 				</div>
+				<h1 className="bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-2 shadow-lg text-dark-primary">
+					{recipe.title}
+				</h1>
 			</div>
 
 			<div className="flex flex-col gap-4 p-4 pb-24">
