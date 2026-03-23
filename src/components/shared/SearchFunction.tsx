@@ -28,8 +28,8 @@ export default function SearchFunction() {
 	};
 
 	return (
-		<div className="flex flex-col justify-center w-full">
-			<label className="input input-bordered flex items-center gap-4 rounded-full h-18 bg-light-primary/60 backdrop-blur-md shadow-inner focus-within:outline-none border-none">
+		<div className="flex flex-col justify-center items-center w-full">
+			<label className="input input-bordered flex items-center gap-4 rounded-full h-18 bg-light-primary/60 backdrop-blur-md shadow-inner focus-within:outline-none sm:w-full sm:max-w-4xl border-none">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="35"
@@ -47,7 +47,7 @@ export default function SearchFunction() {
 				</svg>
 				<input
 					type="search"
-					placeholder="ingredienser..."
+					placeholder="tomato"
 					className="grow bg-transparent focus:outline-none"
 					value={inputValue}
 					onChange={(e) => setInputValue(e.target.value)}
@@ -68,7 +68,7 @@ export default function SearchFunction() {
 					{ingredients.map((ingredient, index) => (
 						<li
 							key={index}
-							className={`badge badge-lg gap-2 py-4 px-4 rounded-2xl bg-white/10 backdrop-blur-md border-none text-light-primary shadow-sm ${colors[index % 3]}`}
+							className={`badge badge-lg gap-2 p-4 rounded-2xl bg-white/10 backdrop-blur-md border-none text-light-primary shadow-md ${colors[index % 3]}`}
 						>
 							<span>{ingredient}</span>
 							<button
@@ -81,11 +81,16 @@ export default function SearchFunction() {
 					))}
 				</ul>
 			</div>
-			{ingredients.length > 0 && (
-				<button className="btn fade-in my-4" onClick={handleSearchClick}>
-					Sök Recept
-				</button>
-			)}
+			<div className="w-full flex justify-center pt-10">
+				{ingredients.length > 0 && (
+					<button
+						className="btn btn-xl btn-block border-none text-xl bg-primary-btn rounded-xl shadow-md mt-4 sm:max-w-4xl"
+						onClick={handleSearchClick}
+					>
+						Search recipe
+					</button>
+				)}
+			</div>
 		</div>
 	);
 }

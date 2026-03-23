@@ -11,10 +11,10 @@ export default function QuizBtn() {
 
 	return (
 		<button
-			className="btn btn-wide btn-lg bg-primary-btn border-none rounded-xl"
+			className="btn btn-wide btn-lg bg-primary-btn border-none rounded-xl shadow-lg"
 			onClick={handleClick}
 		>
-			Gör Quizet
+			Take Quiz
 		</button>
 	);
 }
