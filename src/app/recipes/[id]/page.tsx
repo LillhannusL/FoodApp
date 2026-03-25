@@ -8,6 +8,8 @@ import type { RecipeData } from '@/types/index';
 import Instructions from '@/app/recipes/[id]/components/Instructions';
 import IngredientsList from '@/app/recipes/[id]/components/IngredientsList';
 import Image from 'next/image';
+import FavoritesButton from '@/components/shared/FavoriteButton';
+import BackBtn from '@/components/shared/backButton';
 
 type PageParams = Promise<{ id: string }>;
 
@@ -65,9 +67,13 @@ export default function Recipe({ params }: { params: PageParams }) {
 				alt={recipe.title}
 				width={500}
 				height={500}
-				className="relative sm:pt-32 rounded-xl object-scaling-down"
+				className="relative sm:pt-32 rounded-b-xl object-scaling-down"
 			/>
-			<div className="z-10 absolute top-35 font-bold text-2xl space-y-2 p-2 sm:top-85">
+			<div className="absolute z-10 top-0 w-full flex items-center justify-between px-4">
+				<BackBtn route="/results?type=random" />
+				<FavoritesButton recipe={recipe} />
+			</div>
+			<div className="z-2 absolute top-35 font-bold text-2xl space-y-2 p-2 sm:top-85">
 				<div className="flex gap-4">
 					<span className="badge bg-green-gradient border-none p-4 rounded-full shadow-md">
 						{recipe.readyInMinutes} min

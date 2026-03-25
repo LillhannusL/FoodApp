@@ -31,7 +31,7 @@ export default function Home() {
 
 					<div className="w-full flex justify-center">
 						<div className="w-full flex flex-col justify-center items-center gap-4 bg-light-primary/40 rounded-4xl border border-white/70 p-6 sm:max-w-4xl sm:py-12">
-							<p className="text-2xl font-semibold">Can't deside?</p>
+							<p className="text-2xl font-semibold">Can't decide?</p>
 							<QuizBtn />
 						</div>
 					</div>

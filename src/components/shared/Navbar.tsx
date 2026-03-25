@@ -26,28 +26,6 @@ export default function NavBar() {
 					</Link>
 				</button>
 				<button>
-					<Link href="/recipes" className="flex flex-col items-center">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							className="lucide lucide-cooking-pot-icon lucide-cooking-pot"
-						>
-							<path d="M2 12h20" />
-							<path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
-							<path d="m4 8 16-4" />
-							<path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" />
-						</svg>
-						<span className="dockl-label">Recipes</span>
-					</Link>
-				</button>
-				<button>
 					<Link href="/profile" className="flex flex-col items-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
