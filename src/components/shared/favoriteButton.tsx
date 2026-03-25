@@ -22,13 +22,21 @@ export default function FavoritesButton({ recipe }: favoritesProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
-		if (user?.id) {
-			checkIsLiked(supabase, recipe.id, user.id)
-				.then(setIsLiked)
-				.catch(console.error);
-		} else {
-			setIsLiked(false);
-		}
+		const checkStatus = async () => {
+			if (!user?.id) {
+				setIsLiked(false);
+				return;
+			}
+
+			try {
+				const liked = await checkIsLiked(supabase, recipe.id, user.id);
+				setIsLiked(liked);
+			} catch (error) {
+				console.error('Error checking liked status:', error);
+			}
+		};
+
+		checkStatus();
 	}, [recipe.id, user?.id]);
 
 	const toggleLike = async () => {

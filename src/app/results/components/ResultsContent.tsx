@@ -26,10 +26,6 @@ export default function ResultsPage() {
 	const { ingredients } = useIngredientsStore();
 	const { result } = useQuizStore();
 
-	if (!type) {
-		return null;
-	}
-
 	useEffect(() => {
 		const fetchData = async () => {
 			if (!type) {
@@ -75,6 +71,10 @@ export default function ResultsPage() {
 		if (!recipes[currentIndex]) return;
 		router.push(`/recipes/${recipes[currentIndex].id}`);
 	};
+
+	if (!type) {
+		return null;
+	}
 
 	return (
 		<section className="px-4 flex flex-col items-center justify-center">
