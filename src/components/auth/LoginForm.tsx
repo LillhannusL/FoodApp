@@ -30,7 +30,6 @@ export default function LoginForm() {
 			}
 			setLoading(false);
 		} else {
-			router.push('/');
 			router.refresh();
 		}
 	};
@@ -97,13 +96,20 @@ export default function LoginForm() {
 							title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
 						/>
 					</label>
-					<p className="validator-hint hidden">
-						Must be more than 8 characters, including
-						<br />
-						At least one number <br />
-						At least one lowercase letter <br />
-						At least one uppercase letter
-					</p>
+
+					{error && (
+						<p className="text-red-500 text-sm text-center font-medium animate-pulse">
+							{error}
+						</p>
+					)}
+
+					<button
+						className="w-full self-center mt-8 rounded-xl bg-primary-btn py-3 px-6 shadow-md/20 active:transform active:scale-95"
+						type="submit"
+						disabled={loading}
+					>
+						{loading ? 'Signing in...' : 'Login'}
+					</button>
 				</div>
 			</form>
 		</div>
