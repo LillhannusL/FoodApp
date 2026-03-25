@@ -19,7 +19,7 @@ export default async function ProfilePage() {
 
 	return (
 		<section className="min-h-screen flex flex-col px-4">
-			<ProfileContent user={user} />
+			<ProfileContent currentUser={user} />
 		</section>
 	);
 }

@@ -1,6 +1,7 @@
 import './globals.css';
 import { Karla } from 'next/font/google';
 import NavBar from '@/components/shared/Navbar';
+import { UserProvider } from '@/components/shared/UserProvider';
 
 const karla = Karla({
 	subsets: ['latin'],
@@ -13,11 +14,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={karla.className}>
-			<body className="bg-primary-gradient min-h-screen text-light-primary">
-				{children}
+			<UserProvider>
+				<body className="bg-primary-gradient min-h-screen text-light-primary">
+					{children}
 
-				<NavBar />
-			</body>
+					<NavBar />
+				</body>
+			</UserProvider>
 		</html>
 	);
 }
