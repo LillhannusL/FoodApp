@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { useIngredientsStore } from '@/store/useIngredientsStore';
 import { useRouter } from 'next/navigation';
+import { useResultStore } from '@/store/useResultStore';
 
 export default function SearchFunction() {
 	const router = useRouter();
 	const [inputValue, setInputValue] = useState('');
 	const [ingredients, setIngredients] = useState<string[]>([]);
 	const { setStoreIngredients } = useIngredientsStore();
+	const { clearStoredResult } = useResultStore();
 
 	const colors = ['bg-green-gradient', 'bg-red-gradient', 'bg-orange-gradient'];
 
@@ -24,6 +26,7 @@ export default function SearchFunction() {
 
 	const handleSearchClick = () => {
 		setStoreIngredients(ingredients);
+		clearStoredResult();
 		router.push('/results?type=search');
 	};
 
