@@ -1,27 +1,30 @@
 import { buildURL } from '@/services/buildUrl';
+import { MockService } from './mockServices';
 
 export const fetchRandomRecipes = async () => {
 	try {
 		const res = await fetch('/api/recipes/random');
-		const data = await res.json();
 
+		const data = await res.json();
 		return data.recipes;
 	} catch (error) {
-		console.error('Fel vid hämtning:', error);
+		console.warn('Using mock data for random');
+		return MockService.getRandom();
 	}
 };
 
-export const fetchRecipeByIngredient = async (ingredients: String[]) => {
+export const fetchRecipeByIngredient = async (ingredients: string[]) => {
 	try {
 		const searchString = ingredients.join(',+');
 
 		const res = await fetch(`/api/recipes/search?ingredients=${searchString}`);
+
 		const data = await res.json();
 
 		return data;
 	} catch (error) {
-		console.error('Fel vid hämtning:', error);
-		return [];
+		console.warn('Using mock data for search');
+		return MockService.searchByIngredients(ingredients);
 	}
 };
 
@@ -29,14 +32,14 @@ export const fetchRecipeByID = async (id: string) => {
 	try {
 		const res = await fetch(`/api/recipes/id?id=${id}`);
 		if (!res.ok) {
-			throw new Error('Failed to fetch data');
 		}
 
 		const data = await res.json();
 
 		return data;
 	} catch (error) {
-		console.error('Fel vid hämtning:', error);
+		console.warn('Using Mock Data for IdFetch');
+		return MockService.getRecipeFromId(id);
 	}
 };
 
@@ -47,10 +50,12 @@ export const fetchRecipefromQuiz = async (result: any) => {
 		let query = buildURL(result);
 
 		let res = await fetch(`/api/recipes/quiz?query=${query}`);
+
 		let data = await res.json();
 
 		return data.results || [];
 	} catch (error) {
-		console.error('Failed to fetch:', error);
+		console.warn('Using Mock Data for Quiz');
+		return MockService.getQuizResult(result);
 	}
 };

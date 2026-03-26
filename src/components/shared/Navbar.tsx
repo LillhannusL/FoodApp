@@ -51,7 +51,7 @@ export default function NavBar() {
 			<nav className="hidden md:flex navbar bg-light-primary/40 backdrop-blur-md border-b border-white/30 shadow-sm fixed top-0 z-50">
 				<div className="flex-1">
 					<button className="btn btn-ghost">
-						<Link href="/">Food App</Link>
+						<Link href="/">CulinaryQuest</Link>
 					</button>
 				</div>
 				<div>

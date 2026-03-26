@@ -21,6 +21,7 @@ export default function ResultsPage() {
 	const [recipes, setRecipes] = useState<RecipeData[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const [isMock, setIsMock] = useState(false);
 
 	const type = searchParams.get('type');
 	const { ingredients } = useIngredientsStore();
@@ -58,6 +59,7 @@ export default function ResultsPage() {
 
 				setRecipes(data);
 			} catch (error) {
+				setIsMock(true);
 				console.error('Fetching error:', error);
 			} finally {
 				setIsLoading(false);
@@ -89,6 +91,12 @@ export default function ResultsPage() {
 						<div className="skeleton h-4 w-28"></div>
 						<div className="skeleton h-4 w-full"></div>
 						<div className="skeleton h-4 w-full"></div>
+					</div>
+				)}
+
+				{isMock && (
+					<div className="badge badge-error gap-2 p-4 mb-4">
+						Demo mode: API Limit is reached
 					</div>
 				)}
 				<div>

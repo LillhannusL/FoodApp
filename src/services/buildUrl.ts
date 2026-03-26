@@ -8,7 +8,7 @@ export const buildURL = (answers: any) => {
 	const craving = answers[2];
 	const energy = answers[3];
 
-	let queryParts: string[] = [];
+	const queryParts: string[] = [];
 
 	// CRAVING
 	if (craving === 'hearty') {
