@@ -14,6 +14,7 @@ import { useIngredientsStore } from '@/store/useIngredientsStore';
 import { useRouter } from 'next/navigation';
 import { useQuizStore } from '@/store/useQuizStore';
 import type { RecipeData } from '@/types';
+import { useResultStore } from '@/store/useResultStore';
 
 export default function ResultsPage() {
 	const router = useRouter();
@@ -25,11 +26,18 @@ export default function ResultsPage() {
 
 	const type = searchParams.get('type');
 	const { ingredients } = useIngredientsStore();
+	const { storedResult, setStoredResult } = useResultStore();
 	const { result } = useQuizStore();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			if (!type) {
+				setIsLoading(false);
+				return;
+			}
+
+			if (storedResult && storedResult.length > 0) {
+				setRecipes(storedResult);
 				setIsLoading(false);
 				return;
 			}
@@ -45,7 +53,6 @@ export default function ResultsPage() {
 			}
 
 			setIsLoading(true);
-
 			try {
 				let data;
 
@@ -58,6 +65,7 @@ export default function ResultsPage() {
 				}
 
 				setRecipes(data);
+				setStoredResult(data);
 			} catch (error) {
 				setIsMock(true);
 				console.error('Fetching error:', error);
@@ -67,7 +75,7 @@ export default function ResultsPage() {
 		};
 
 		fetchData();
-	}, [type, ingredients, result]);
+	}, [type, ingredients, result, setStoredResult]);
 
 	const handleClick = () => {
 		if (!recipes[currentIndex]) return;
