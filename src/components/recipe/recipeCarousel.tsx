@@ -14,7 +14,7 @@ function SafeImage({ src, alt, width, height, className }: any) {
 	const [imgSrc, setImgSrc] = useState(src || '/images/fallback-image.png');
 
 	useEffect(() => {
-		setImgSrc(src || '/images/fallback-images.png');
+		setImgSrc(src || '/images/fallback-image.png');
 	}, [src]);
 
 	return (
@@ -76,20 +76,22 @@ export default function RecipeCarousel({
 								className="w-full h-full object-cover rounded-xl sm:object-contain"
 							/>
 
-							<div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between z-10 sm:left-52 sm:right-52">
-								<button
-									onClick={gotToPrev}
-									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
-								>
-									❮
-								</button>
-								<button
-									onClick={goToNext}
-									className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
-								>
-									❯
-								</button>
-							</div>
+							{recipes.length > 1 && (
+								<div className="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between z-10 sm:left-52 sm:right-52">
+									<button
+										onClick={gotToPrev}
+										className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
+									>
+										❮
+									</button>
+									<button
+										onClick={goToNext}
+										className="btn btn-circle btn-sm bg-black/20 border-none text-white backdrop-blur-md hover:bg-black/40 shadow-lg/30"
+									>
+										❯
+									</button>
+								</div>
+							)}
 						</div>
 
 						{/* Text-sektion under bilden */}
