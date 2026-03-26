@@ -17,6 +17,7 @@ export default function Recipe({ params }: { params: PageParams }) {
 	const { id } = React.use(params);
 	const [recipe, setRecipe] = useState<RecipeData | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [imgSrc, setImgSrc] = useState<string>('');
 
 	//Fetch recipe from id
 	useEffect(() => {
@@ -29,6 +30,7 @@ export default function Recipe({ params }: { params: PageParams }) {
 				const data = await fetchRecipeByID(id);
 				if (!isIgnore) {
 					setRecipe(data);
+					setImgSrc(data.image);
 					setLoading(false);
 				}
 			} catch (error) {
@@ -63,11 +65,12 @@ export default function Recipe({ params }: { params: PageParams }) {
 	return (
 		<section className="sm:flex sm:flex-col sm:items-center">
 			<Image
-				src={recipe.image}
-				alt={recipe.title}
+				src={imgSrc}
+				alt={recipe.title || 'Recipe Image'}
 				width={500}
 				height={500}
 				className="relative sm:pt-32 rounded-b-xl object-scaling-down"
+				onError={() => setImgSrc('/images/fallback-image.png')}
 			/>
 			<div className="absolute z-10 top-0 w-full flex items-center justify-between px-4">
 				<BackBtn route="/results?type=random" />

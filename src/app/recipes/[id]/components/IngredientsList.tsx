@@ -69,8 +69,8 @@ export default function IngredientsList({ ingredients }: IngredientsListProps) {
 		<div className="space-y-6">
 			<div>
 				<h2 className="text-3xl font-bold">Ingredients</h2>
-				<ul className="">
-					{ingredients.map((ingredient: any) => {
+				<ul>
+					{ingredients.map((ingredient: Ingredient) => {
 						const bgColor = getIngredientColor(ingredient.aisle);
 
 						return (

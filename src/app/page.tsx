@@ -10,7 +10,7 @@ export default function Home() {
 		"
 		>
 			<h1 className="text-4xl font-bold pt-10 pb-4 text-center md:pt-28">
-				Hungry?
+				CulinaryQuest
 			</h1>
 			<h2 className="text-2xl font-semibold pb-4">Dont know what to eat?</h2>
 
