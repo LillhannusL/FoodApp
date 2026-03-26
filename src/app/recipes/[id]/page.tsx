@@ -8,7 +8,7 @@ import type { RecipeData } from '@/types/index';
 import Instructions from '@/app/recipes/[id]/components/Instructions';
 import IngredientsList from '@/app/recipes/[id]/components/IngredientsList';
 import Image from 'next/image';
-import FavoritesButton from '@/components/shared/FavoriteButton';
+import FavoritesButton from '@/components/shared/favoriteButton';
 import BackBtn from '@/components/shared/backButton';
 
 type PageParams = Promise<{ id: string }>;
