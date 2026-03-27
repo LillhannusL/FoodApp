@@ -13,3 +13,5 @@ To ensure a seamless experience during evaluation and presentations, I have impl
 - **The Problem:** Third-party APIs like Spoonacular have strict daily request limits.
 - **The Solution:** If the API reaches its credit limit, the application automatically switches to a built-in **Mock Service**.
 - **The Result:** You can still test the Search, Quiz, and Favorites features even if the live API is offline.
+
+Vercel Link: https://food-app-xi-mauve.vercel.app/
