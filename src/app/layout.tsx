@@ -1,26 +1,29 @@
-import './globals.css';
-import { Karla } from 'next/font/google';
-import NavBar from '@/components/shared/Navbar';
-import { UserProvider } from '@/components/shared/UserProvider';
+import "./globals.css";
+import { Karla, Lora } from "next/font/google";
+import NavBar from "@/components/shared/Navbar";
+import { UserProvider } from "@/components/shared/UserProvider";
 
 const karla = Karla({
-	subsets: ['latin'],
+  subsets: ["latin"],
+});
+const lora = Lora({
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en" className={karla.className}>
-			<UserProvider>
-				<body className="bg-primary-gradient min-h-screen text-light-primary">
-					{children}
+  return (
+    <html lang="en" className={karla.className}>
+      <UserProvider>
+        <body className="bg-[url(/images/BG.jpg)] bg-contain sm:bg-cover min-h-screen text-light-primary">
+          {children}
 
-					<NavBar />
-				</body>
-			</UserProvider>
-		</html>
-	);
+          <NavBar />
+        </body>
+      </UserProvider>
+    </html>
+  );
 }
