@@ -1,75 +1,77 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
-	EnergyQuestion,
-	CravingQuestion,
-	DishPreference,
-	DietPreference,
-} from '@/app/quiz/components/QuestionsComponent';
-import { useQuizStore } from '@/store/useQuizStore';
-import { useRouter } from 'next/navigation';
+  EnergyQuestion,
+  CravingQuestion,
+  DishPreference,
+  DietPreference,
+} from "@/app/quiz/components/QuestionsComponent";
+import { useQuizStore } from "@/store/useQuizStore";
+import { useRouter } from "next/navigation";
 
 export default function QuizClientComponent() {
-	const router = useRouter();
-	const [step, setStep] = useState(0);
-	const [answers, setAnswers] = useState({});
-	const { setResult } = useQuizStore();
+  const router = useRouter();
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const { setResult } = useQuizStore();
 
-	const totalSteps = 4;
+  const totalSteps = 4;
 
-	const handleNext = (val: string) => {
-		const updatedAnswers = { ...answers, [step]: val };
-		setAnswers(updatedAnswers);
+  const handleNext = (val: string) => {
+    const updatedAnswers = { ...answers, [step]: val };
+    setAnswers(updatedAnswers);
 
-		setStep(step + 1);
-	};
+    setStep(step + 1);
+  };
 
-	const handleClick = () => {
-		setResult(answers);
-		router.push('/results?type=quiz');
-	};
+  const handleClick = () => {
+    setResult(answers);
+    router.push("/results?type=quiz");
+  };
 
-	if (step >= totalSteps) {
-		return (
-			<section className="text-center pt-28 flex flex-col gap-4 items-center justify-center h-full">
-				<h1 className="text-4xl font-bold">The Quiz is done!</h1>
-				<p className="mt-4">We've analyzed your energy and cravings.</p>
-				<p>Ready for your recipes?</p>
-				<button
-					className="btn btn-xl btn-block border-none text-xl bg-linear-to-r from-emerald-400 to-cyan-400 rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mt-4"
-					onClick={handleClick}
-				>
-					See recipes
-				</button>
-				<button
-					className="btn btn-xl btn-block border-none text-xl bg-orange-gradient rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mb-4 mt-auto"
-					onClick={() => window.location.reload()}
-				>
-					Start Over
-				</button>
-			</section>
-		);
-	}
+  if (step >= totalSteps) {
+    return (
+      <section className="pt-12 flex flex-col gap-4 items-center justify-center h-full text-light-primary">
+        <h1>The Quiz is done!</h1>
+        <p className="mt-4 pb-4 text-lg text-center">
+          We've analyzed your energy and cravings.
+        </p>
+        <p>Ready for your recipes?</p>
+        <button
+          className="btn btn-xl btn-block border-none text-xl bg-teal-600 rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mt-4"
+          onClick={handleClick}
+        >
+          See recipes
+        </button>
+        <button
+          className="btn btn-xl btn-block border-none text-xl bg-orange-gradient rounded-xl shadow-md sm:max-w-xl sm:flex sm:items-center mb-4 mt-auto"
+          onClick={() => window.location.reload()}
+        >
+          Start Over
+        </button>
+      </section>
+    );
+  }
 
-	return (
-		<section className="max-w-4xl mx-auto">
-			{/* progress bar */}
-			<div className="flex flex-col items-center gap-4">
-				<progress
-					className="progress progress-warning w-full"
-					value={((step + 1) / totalSteps) * 100}
-					max={100}
-				></progress>
-				<span className="text-sm font-semibold uppercase text-light-primary">
-					{`Question ${step + 1} of ${totalSteps}`}
-				</span>
-			</div>
+  return (
+    <section className="max-w-4xl mx-auto">
+      {/* progress bar */}
+      <div className="flex flex-col items-center gap-4">
+        <progress
+          className="progress progress-warning w-full"
+          value={((step + 1) / totalSteps) * 100}
+          max={100}
+        ></progress>
+        <span className="text-sm font-semibold uppercase text-light-primary">
+          {`Question ${step + 1} of ${totalSteps}`}
+        </span>
+      </div>
 
-			{step === 0 && <DishPreference onAnswer={handleNext} />}
-			{step === 1 && <DietPreference onAnswer={handleNext} />}
-			{step === 2 && <CravingQuestion onAnswer={handleNext} />}
-			{step === 3 && <EnergyQuestion onAnswer={handleNext} />}
-		</section>
-	);
+      {step === 0 && <DishPreference onAnswer={handleNext} />}
+      {step === 1 && <DietPreference onAnswer={handleNext} />}
+      {step === 2 && <CravingQuestion onAnswer={handleNext} />}
+      {step === 3 && <EnergyQuestion onAnswer={handleNext} />}
+    </section>
+  );
 }
